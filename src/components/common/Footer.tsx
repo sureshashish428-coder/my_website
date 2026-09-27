@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowUp } from "lucide-react";
-import Image from "next/image";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -42,22 +41,13 @@ export default function Footer() {
           {/* Col 1: Big Landscape Logo Area */}
           <div className="col-span-2 md:col-span-5 flex flex-col justify-between">
             <div>
-              {/* Landscape Logo Display */}
-              <div className="relative w-56 sm:w-72 h-16 sm:h-20 mb-6">
-                <Image
+              {/* Direct HTML img tag: Zero optimization blocking */}
+              <div className="mb-6">
+                <img
                   src="/logo-landscape.png"
-                  alt="AKSBit Systems"
-                  fill
-                  priority
-                  className="object-contain object-left"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLElement).style.display = "none";
-                  }}
+                  alt="AKSBit Systems Logo"
+                  className="h-14 sm:h-20 w-auto object-contain block max-w-full drop-shadow-md"
                 />
-                {/* Fallback Text if logo image isn't placed yet */}
-                <span className="text-2xl font-black tracking-tight text-white block">
-                  AKSBit<span className="text-brand-blue"> Systems</span>
-                </span>
               </div>
               <p className="text-xs text-gray-400 max-w-sm leading-relaxed font-mono">
                 Innovate • Build • Empower • Deliver. Smart solutions crafted for sustainable business growth.
@@ -93,7 +83,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Services Summary */}
+          {/* Col 3: Capabilities */}
           <div className="col-span-1 md:col-span-2">
             <h4 className="text-xs font-mono uppercase tracking-widest text-brand-blue font-bold mb-4">
               Capabilities
@@ -107,7 +97,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4: Scroll To Top Action */}
+          {/* Col 4: Action */}
           <div className="col-span-2 md:col-span-2 flex flex-col justify-between items-start md:items-end">
             <div>
               <h4 className="text-xs font-mono uppercase tracking-widest text-brand-blue font-bold mb-4">
@@ -128,29 +118,45 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section: Fluid Responsive Typographic Branding with Animated Reveal */}
-        <div className="pt-12 pb-6 border-t border-white/5 select-none overflow-hidden">
+        {/* Bottom Section: Edge-to-Edge Adaptive Big Typography */}
+        <div className="pt-10 pb-4 border-t border-white/5 select-none w-full">
           <motion.div
-            initial={{ opacity: 0, y: 35 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full flex justify-between items-center tracking-tighter font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/40 to-white/5 leading-none"
-            style={{ fontSize: "clamp(2.5rem, 8.8vw, 9.5rem)" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-full flex items-center justify-center"
           >
-            <span>A</span>
-            <span>K</span>
-            <span>S</span>
-            <span>B</span>
-            <span>I</span>
-            <span>T</span>
-            <span className="text-brand-blue/60 ml-2 sm:ml-4">S</span>
-            <span>Y</span>
-            <span>S</span>
-            <span>T</span>
-            <span>E</span>
-            <span>M</span>
-            <span>S</span>
+            {/* SVG Text: Guarantee karta hai ki text 100% width le bina kate */}
+            <svg
+              viewBox="0 0 1350 170"
+              className="w-full h-auto max-h-[180px] overflow-visible"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="brandGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+                  <stop offset="65%" stopColor="#FFFFFF" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.05" />
+                </linearGradient>
+              </defs>
+              <text
+                x="50%"
+                y="135"
+                textAnchor="middle"
+                fill="url(#brandGradient)"
+                className="font-black"
+                style={{
+                  fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                  fontSize: "155px",
+                  fontWeight: 900,
+                  letterSpacing: "-0.04em",
+                }}
+              >
+                AKSBIT SYSTEMS
+              </text>
+            </svg>
           </motion.div>
         </div>
 

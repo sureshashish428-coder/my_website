@@ -669,6 +669,21 @@ video {
 .h-8 {
   height: 2rem;
 }
+.h-full {
+  height: 100%;
+}
+.h-14 {
+  height: 3.5rem;
+}
+.h-auto {
+  height: auto;
+}
+.max-h-16 {
+  max-height: 4rem;
+}
+.max-h-\[180px\] {
+  max-height: 180px;
+}
 .min-h-\[340px\] {
   min-height: 340px;
 }
@@ -714,6 +729,12 @@ video {
 .w-56 {
   width: 14rem;
 }
+.w-64 {
+  width: 16rem;
+}
+.w-auto {
+  width: auto;
+}
 .max-w-2xl {
   max-width: 42rem;
 }
@@ -740,6 +761,9 @@ video {
 }
 .max-w-sm {
   max-width: 24rem;
+}
+.max-w-full {
+  max-width: 100%;
 }
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
@@ -863,6 +887,9 @@ video {
 }
 .overflow-hidden {
   overflow: hidden;
+}
+.overflow-visible {
+  overflow: visible;
 }
 .whitespace-nowrap {
   white-space: nowrap;
@@ -1195,6 +1222,9 @@ video {
 .pt-12 {
   padding-top: 3rem;
 }
+.pt-10 {
+  padding-top: 2.5rem;
+}
 .text-left {
   text-align: left;
 }
@@ -1242,6 +1272,9 @@ video {
 .text-\[12vw\] {
   font-size: 12vw;
 }
+.text-\[8\.5vw\] {
+  font-size: 8.5vw;
+}
 .font-black {
   font-weight: 900;
 }
@@ -1283,6 +1316,9 @@ video {
 }
 .tracking-tighter {
   letter-spacing: -0.05em;
+}
+.tracking-normal {
+  letter-spacing: 0em;
 }
 .text-\[\#07152F\] {
   --tw-text-opacity: 1;
@@ -1411,6 +1447,10 @@ video {
 }
 .drop-shadow {
   --tw-drop-shadow: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.drop-shadow-md {
+  --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .filter {
@@ -1714,8 +1754,16 @@ html.lenis body {
     height: 5rem;
   }
 
+  .sm\:max-h-20 {
+    max-height: 5rem;
+  }
+
   .sm\:w-72 {
     width: 18rem;
+  }
+
+  .sm\:w-80 {
+    width: 20rem;
   }
 
   .sm\:grid-cols-2 {
@@ -1748,6 +1796,14 @@ html.lenis body {
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .sm\:text-\[7\.6vw\] {
+    font-size: 7.6vw;
+  }
+
+  .sm\:tracking-tight {
+    letter-spacing: -0.025em;
   }
 }
 
@@ -1853,5 +1909,12 @@ html.lenis body {
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .xl\:text-\[7\.2vw\] {
+    font-size: 7.2vw;
   }
 }
