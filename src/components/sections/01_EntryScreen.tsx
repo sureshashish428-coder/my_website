@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { ArrowRight, Volume2, VolumeX } from "lucide-react";
+import { ArrowRight, Volume2, VolumeX, Terminal, ShieldCheck, Zap } from "lucide-react";
 import useSound from "use-sound";
 
 interface EntryProps {
@@ -11,12 +10,29 @@ interface EntryProps {
   onEnter: () => void;
 }
 
+const bootLogs = [
+  "KERNEL_CORE_INITIALIZED ... [OK]",
+  "GPU_ACCELERATOR: 60FPS SYNCHRONIZED",
+  "ESTABLISHING SYSTEM ENCRYPTION ... [PASS]",
+  "ALL PROTOCOLS ACTIVE // READY",
+];
+
 export default function EntryScreen({ isOpen, onEnter }: EntryProps) {
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [logIndex, setLogIndex] = useState<number>(0);
+  const [isExiting, setIsExiting] = useState<boolean>(false);
 
-  // Sound hooks with safe fallback
+  // Progressive Boot Text Telemetry
+  useEffect(() => {
+    if (!isOpen) return;
+    const interval = setInterval(() => {
+      setLogIndex((prev) => (prev < bootLogs.length - 1 ? prev + 1 : prev));
+    }, 450);
+    return () => clearInterval(interval);
+  }, [isOpen]);
+
   const [playStartSound] = useSound("/sounds/system-start.mp3", {
-    volume: 0.45,
+    volume: 0.4,
     soundEnabled,
   });
 
@@ -26,16 +42,17 @@ export default function EntryScreen({ isOpen, onEnter }: EntryProps) {
   });
 
   const handleEnterClick = () => {
+    setIsExiting(true);
     if (soundEnabled) {
       try {
         playStartSound();
       } catch {
-        // audio play handle fallback
+        // Safe catch
       }
     }
     setTimeout(() => {
       onEnter();
-    }, 300);
+    }, 600);
   };
 
   return (
@@ -46,23 +63,29 @@ export default function EntryScreen({ isOpen, onEnter }: EntryProps) {
           initial={{ opacity: 1 }}
           exit={{
             y: "-100%",
-            transition: { duration: 0.85, ease: [0.77, 0, 0.175, 1] },
+            transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
           }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#07152F] text-white px-6 py-10 selection:bg-transparent"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-between bg-[#030712] text-white px-6 py-8 sm:py-10 select-none overflow-hidden"
         >
-          {/* Subtle Ambient Circuit Glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,104,232,0.18)_0%,transparent_65%)] pointer-events-none" />
+          {/* Subtle Ambient Circuit Glow & Radial Grid */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,104,232,0.22)_0%,transparent_65%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:28px_28px] pointer-events-none opacity-40" />
 
-          {/* Sound Toggle (Top-Right) */}
-          <div className="w-full max-w-6xl flex justify-end relative z-10">
+          {/* Top Bar: Live Status + Audio Toggle */}
+          <div className="w-full max-w-6xl flex items-center justify-between relative z-10">
+            <div className="flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[10px] font-mono text-gray-300">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>TERMINAL READY</span>
+            </div>
+
             <button
               type="button"
               onClick={() => setSoundEnabled(!soundEnabled)}
-              className="flex items-center gap-2 text-xs font-mono tracking-wider text-gray-400 hover:text-white transition-colors px-3 py-1.5 rounded-full border border-white/10 bg-white/5"
+              className="flex items-center gap-2 text-xs font-mono tracking-wider text-gray-300 hover:text-white transition-colors px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md cursor-pointer"
             >
               {soundEnabled ? (
                 <>
-                  <Volume2 className="w-3.5 h-3.5 text-brand-blue" />
+                  <Volume2 className="w-3.5 h-3.5 text-[#1468E8]" />
                   <span>SOUND: ON</span>
                 </>
               ) : (
@@ -74,74 +97,95 @@ export default function EntryScreen({ isOpen, onEnter }: EntryProps) {
             </button>
           </div>
 
-          {/* Central System Wake-up Core */}
+          {/* Center Stage: Holographic Rotating Core */}
           <div className="flex flex-col items-center text-center relative z-10 my-auto">
-            {/* Logo Container with Subtle Pulse Ring */}
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative mb-8"
-            >
-              {/* Pulsing Backlight */}
-              <div className="absolute -inset-4 bg-brand-blue/30 rounded-full blur-xl animate-pulse" />
+            
+            {/* Holographic Glowing Pulse Rings */}
+            <div className="relative mb-8 flex items-center justify-center">
+              
+              {/* Rotating Outer Tech Ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                className="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border border-dashed border-[#1468E8]/40 pointer-events-none"
+              />
 
-              {/* Logo Frame */}
-              <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-3xl bg-gradient-to-b from-white/10 to-white/5 border border-white/20 p-4 flex items-center justify-center backdrop-blur-md shadow-[0_0_50px_rgba(20,104,232,0.4)]">
-                <Image
-                  src="/logo.png"
+              {/* Counter-rotating Inner Orbit */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                className="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full border border-[#38BDF8]/20 pointer-events-none"
+              />
+
+              {/* Core Logo Card */}
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative z-10 px-6 py-4 rounded-3xl bg-[#050D1A]/90 border border-white/20 backdrop-blur-xl shadow-[0_0_60px_rgba(20,104,232,0.45)] flex items-center justify-center group"
+              >
+                <img
+                  src="/logo-landscape.png"
                   alt="AKSBit Systems Logo"
-                  width={80}
-                  height={80}
-                  priority
-                  className="object-contain drop-shadow"
+                  className="h-11 sm:h-13 w-auto object-contain drop-shadow-[0_0_18px_rgba(20,104,232,0.9)]"
                   onError={(e) => {
-                    const target = e.currentTarget as HTMLElement;
-                    target.style.display = "none";
+                    (e.currentTarget as HTMLElement).style.display = "none";
+                    const fb = document.getElementById("entry-logo-fallback");
+                    if (fb) fb.style.display = "flex";
                   }}
                 />
-              </div>
-            </motion.div>
+                <div id="entry-logo-fallback" className="hidden items-center gap-2 text-2xl font-black text-white">
+                  AKSBit<span className="text-[#1468E8]"> Systems</span>
+                </div>
+              </motion.div>
+            </div>
 
-            {/* Brand Title & Taglines */}
+            {/* Tagline */}
             <motion.div
-              initial={{ y: 15, opacity: 0 }}
+              initial={{ y: 12, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.15, duration: 0.5 }}
             >
-              <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2">
-                AKSBit Systems
-              </h1>
-              <p className="text-xs md:text-sm font-mono text-[#EAF3FF]/80 tracking-widest uppercase mb-10">
+              <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white mb-1.5">
+                ENGINEERING DIGITAL ECOSYSTEMS
+              </h2>
+              <p className="text-[11px] sm:text-xs font-mono text-[#60A5FA] tracking-widest uppercase mb-8">
                 INNOVATE • BUILD • EMPOWER • DELIVER
               </p>
             </motion.div>
 
-            {/* Trigger CTA */}
+            {/* Action Trigger Button */}
             <motion.button
               type="button"
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.35, duration: 0.6 }}
+              transition={{ delay: 0.25, duration: 0.5 }}
               onClick={handleEnterClick}
               onMouseEnter={() => {
                 if (soundEnabled) {
                   try {
                     playHoverSound();
                   } catch {
-                    // audio play handle fallback
+                    // Safe catch
                   }
                 }
               }}
-              className="group relative inline-flex items-center gap-3 px-9 py-4 rounded-full bg-brand-blue text-white text-xs md:text-sm font-semibold tracking-wider uppercase transition-all duration-300 shadow-[0_0_25px_rgba(20,104,232,0.4)] hover:shadow-[0_0_40px_rgba(20,104,232,0.7)] hover:scale-105"
+              className="group relative inline-flex items-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-[#1468E8] text-white text-xs sm:text-sm font-mono font-bold tracking-widest uppercase transition-all duration-300 shadow-[0_0_30px_rgba(20,104,232,0.5)] hover:shadow-[0_0_45px_rgba(20,104,232,0.8)] hover:scale-105 active:scale-95 cursor-pointer"
             >
               <span>ENTER EXPERIENCE</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </motion.button>
+
+            {/* Live Boot Stream Logs */}
+            <div className="mt-8 flex items-center gap-2 text-[10px] font-mono text-gray-400 bg-white/[0.02] px-3.5 py-1.5 rounded-full border border-white/5">
+              <Terminal className="w-3 h-3 text-[#1468E8]" />
+              <span>{bootLogs[logIndex]}</span>
+            </div>
+
           </div>
 
-          {/* Footer Note */}
-          <div className="relative z-10 text-[11px] font-mono text-gray-500 uppercase tracking-widest">
+          {/* Footer Bottom Note */}
+          <div className="relative z-10 text-[10px] font-mono text-gray-500 uppercase tracking-widest">
             Smart Solutions for a Better Tomorrow
           </div>
         </motion.div>

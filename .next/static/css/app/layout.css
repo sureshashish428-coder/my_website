@@ -719,6 +719,9 @@ video {
 .z-0 {
   z-index: 0;
 }
+.z-\[99999\] {
+  z-index: 99999;
+}
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -813,6 +816,9 @@ video {
 }
 .mb-14 {
   margin-bottom: 3.5rem;
+}
+.mt-8 {
+  margin-top: 2rem;
 }
 .line-clamp-2 {
   overflow: hidden;
@@ -1056,6 +1062,9 @@ video {
 }
 .w-\[650px\] {
   width: 650px;
+}
+.w-28 {
+  width: 7rem;
 }
 .min-w-\[190px\] {
   min-width: 190px;
@@ -1383,6 +1392,9 @@ video {
 .border-r {
   border-right-width: 1px;
 }
+.border-dashed {
+  border-style: dashed;
+}
 .border-\[\#07152F\] {
   --tw-border-opacity: 1;
   border-color: rgb(7 21 47 / var(--tw-border-opacity, 1));
@@ -1483,6 +1495,9 @@ video {
 }
 .border-purple-500\/30 {
   border-color: rgb(168 85 247 / 0.3);
+}
+.border-\[\#38BDF8\]\/20 {
+  border-color: rgb(56 189 248 / 0.2);
 }
 .bg-\[\#030812\] {
   --tw-bg-opacity: 1;
@@ -1740,6 +1755,9 @@ video {
 }
 .bg-\[radial-gradient\(rgba\(255\2c 255\2c 255\2c 0\.03\)_1px\2c transparent_1px\)\] {
   background-image: radial-gradient(rgba(255,255,255,0.03) 1px,transparent 1px);
+}
+.bg-\[radial-gradient\(circle_at_center\2c rgba\(20\2c 104\2c 232\2c 0\.22\)_0\%\2c transparent_65\%\)\] {
+  background-image: radial-gradient(circle at center,rgba(20,104,232,0.22) 0%,transparent 65%);
 }
 .from-\[\#071328\]\/90 {
   --tw-gradient-from: rgb(7 19 40 / 0.9) var(--tw-gradient-from-position);
@@ -2782,6 +2800,16 @@ video {
   --tw-shadow-colored: 0 4px 20px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.shadow-\[0_0_30px_rgba\(20\2c 104\2c 232\2c 0\.5\)\] {
+  --tw-shadow: 0 0 30px rgba(20,104,232,0.5);
+  --tw-shadow-colored: 0 0 30px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-\[0_0_60px_rgba\(20\2c 104\2c 232\2c 0\.45\)\] {
+  --tw-shadow: 0 0 60px rgba(20,104,232,0.45);
+  --tw-shadow-colored: 0 0 60px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .shadow-blue-500\/25 {
   --tw-shadow-color: rgb(59 130 246 / 0.25);
   --tw-shadow: var(--tw-shadow-colored);
@@ -2876,6 +2904,10 @@ video {
 }
 .drop-shadow-\[0_2px_8px_rgba\(255\2c 255\2c 255\2c 0\.3\)\] {
   --tw-drop-shadow: drop-shadow(0 2px 8px rgba(255,255,255,0.3));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.drop-shadow-\[0_0_18px_rgba\(20\2c 104\2c 232\2c 0\.9\)\] {
+  --tw-drop-shadow: drop-shadow(0 0 18px rgba(20,104,232,0.9));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .invert {
@@ -3342,6 +3374,12 @@ html.lenis body {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.hover\:shadow-\[0_0_45px_rgba\(20\2c 104\2c 232\2c 0\.8\)\]:hover {
+  --tw-shadow: 0 0 45px rgba(20,104,232,0.8);
+  --tw-shadow-colored: 0 0 45px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -3509,6 +3547,14 @@ html.lenis body {
     height: 2.25rem;
   }
 
+  .sm\:h-36 {
+    height: 9rem;
+  }
+
+  .sm\:h-44 {
+    height: 11rem;
+  }
+
   .sm\:w-12 {
     width: 3rem;
   }
@@ -3531,6 +3577,14 @@ html.lenis body {
 
   .sm\:w-auto {
     width: auto;
+  }
+
+  .sm\:w-36 {
+    width: 9rem;
+  }
+
+  .sm\:w-44 {
+    width: 11rem;
   }
 
   .sm\:max-w-\[220px\] {
@@ -3644,6 +3698,16 @@ html.lenis body {
   .sm\:py-28 {
     padding-top: 7rem;
     padding-bottom: 7rem;
+  }
+
+  .sm\:py-10 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .sm\:py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .sm\:pt-5 {
