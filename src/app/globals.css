@@ -51,3 +51,16 @@ html.lenis body {
   background: #1468e8;
   border-radius: 9999px;
 }
+
+
+/* Enable Hardware Acceleration for buttery transitions */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}

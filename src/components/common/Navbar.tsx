@@ -12,7 +12,7 @@ interface NavLinkItem {
 
 const navLinks: NavLinkItem[] = [
   { id: "hero", label: "Overview", href: "#hero" },
-  { id: "story", label: "Journey", href: "#story" },
+  { id: "story", label: "Journey", href: "/journey" },
   { id: "services", label: "Workshop", href: "#services" },
   { id: "projects", label: "Work", href: "#projects" },
   { id: "tech", label: "Workbench", href: "#tech" },
